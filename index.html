@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1a0b1f;--bg2:#3a1237;--bg3:#6b1d4a;
+  --rose:#ff6f9c;--glow:#ffb3cd;--paper:#fffaf3;--ink:#4a2a3a;
+  --env:#f3d3cf;--env-dark:#e2b4b4;--wax:#b3123a;
+  --script:'Great Vibes','Snell Roundhand','Brush Script MT',cursive;
+  --sans:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{
+  font-family:var(--sans);color:#fff;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,var(--bg3),var(--bg2) 45%,var(--bg1));
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  touch-action:manipulation;user-select:none;-webkit-user-select:none;
+}
+.pulse{position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 20% 30%,rgba(255,111,156,.25),transparent 45%),
+             radial-gradient(circle at 80% 75%,rgba(255,179,205,.2),transparent 50%);
+  animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.particles{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.particles i{position:absolute;bottom:-10px;border-radius:50%;background:var(--glow);
+  box-shadow:0 0 10px 3px rgba(255,179,205,.7);opacity:0;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(0) translateX(0);opacity:0}15%{opacity:.8}
+  100%{transform:translateY(-105vh) translateX(var(--dx));opacity:0}}
+
+main{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:2.2rem;padding:4.5rem 1.2rem 1.5rem;text-align:center}
+h1{font-family:var(--script);font-weight:400;font-size:clamp(2.2rem,9vw,3.6rem);line-height:1.15;margin:0;
+  color:#ffe3ee;text-shadow:0 0 18px rgba(255,111,156,.7);position:absolute;top:max(1.1rem,env(safe-area-inset-top));
+  left:0;right:0;padding:0 4.2rem 0 1rem;margin-top:.2rem}
+.hint{font-size:1rem;letter-spacing:.08em;color:var(--glow);margin:0;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px);opacity:.75}}
+
+/* Envelope */
+.scene{perspective:1100px;cursor:pointer;margin-top:3.5rem}
+.env{position:relative;width:min(80vw,330px);aspect-ratio:3/2;transform-style:preserve-3d;
+  transform:rotateX(8deg);filter:drop-shadow(0 25px 30px rgba(0,0,0,.5));transition:transform .6s}
+.scene:active .env{transform:rotateX(8deg) scale(.98)}
+.back{position:absolute;inset:0;background:var(--env-dark);border-radius:6px}
+.peek{position:absolute;left:6%;right:6%;top:8%;height:86%;background:var(--paper);border-radius:4px;z-index:2;
+  transition:transform 1s cubic-bezier(.3,.7,.2,1) .7s;padding:12% 10%;color:var(--ink)}
+.peek span{display:block;height:5px;border-radius:3px;background:#e9d3d0;margin-bottom:9px}
+.peek span:nth-child(2){width:80%}.peek span:nth-child(3){width:60%}
+.front{position:absolute;inset:0;z-index:3;border-radius:6px;
+  background:linear-gradient(160deg,#f8dedb,var(--env));clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+.front::after{content:"";position:absolute;inset:0;background:linear-gradient(20deg,rgba(0,0,0,.08),transparent 55%)}
+.flap{position:absolute;left:0;right:0;top:0;height:58%;z-index:4;transform-origin:top center;
+  background:linear-gradient(180deg,#f6d9d6,#e8bcbc);clip-path:polygon(0 0,100% 0,50% 100%);
+  transition:transform .9s cubic-bezier(.5,0,.2,1),z-index 0s .45s;border-radius:6px 6px 0 0}
+.seal{position:absolute;left:50%;top:58%;width:54px;height:54px;margin:-27px 0 0 -27px;z-index:6;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#e0305c,var(--wax) 60%,#7d0a28);display:grid;place-items:center;
+  box-shadow:0 3px 8px rgba(0,0,0,.5),inset 0 0 0 3px rgba(255,255,255,.12);transition:opacity .5s,transform .5s}
+.seal svg{width:26px;height:26px;fill:#ffd1dc;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.env.open{transform:rotateX(0)}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .seal{opacity:0;transform:scale(1.4);pointer-events:none}
+.env.open .peek{transform:translateY(-55%)}
+
+/* Music */
+.music{position:fixed;top:max(.9rem,env(safe-area-inset-top));right:.9rem;z-index:30;width:56px;height:56px;border:0;border-radius:50%;
+  padding:0;cursor:pointer;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;place-items:center;box-shadow:0 0 18px rgba(255,111,156,.4)}
+.vinyl{width:42px;height:42px;border-radius:50%;position:relative;
+  background:repeating-radial-gradient(circle,#111 0 2px,#222 3px 4px);animation:spin 3s linear infinite paused}
+.vinyl::after{content:"";position:absolute;inset:14px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 3px #2a0f1c}
+.playing .vinyl{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wave{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);display:flex;gap:3px;height:12px;align-items:flex-end;opacity:0;transition:opacity .3s}
+.playing .wave{opacity:1}
+.wave b{width:3px;height:100%;border-radius:2px;background:var(--glow);transform-origin:bottom;animation:eq .9s ease-in-out infinite}
+.wave b:nth-child(2){animation-delay:.2s}.wave b:nth-child(3){animation-delay:.4s}.wave b:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.toast{position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:60;
+  background:rgba(20,5,20,.85);padding:.7rem 1.1rem;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;
+  transition:.4s;max-width:88vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Modal */
+.modal{position:fixed;inset:0;z-index:40;display:flex;background:rgba(15,4,18,.85);backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.modal.show{opacity:1;visibility:visible}
+.paper{position:relative;margin:0;width:100%;height:100%;overflow-y:auto;background:linear-gradient(#fffaf3,#fdeee8);color:var(--ink);
+  padding:calc(4.5rem + env(safe-area-inset-top,0px)) 1.6rem calc(3rem + env(safe-area-inset-bottom,0px));
+  transform:translateY(60px) scale(.96);transition:transform .7s cubic-bezier(.2,.8,.2,1);user-select:text;-webkit-user-select:text}
+.modal.show .paper{transform:none}
+.paper-in{max-width:520px;margin:0 auto}
+.paper h2{font-family:var(--script);font-weight:400;font-size:2.6rem;margin:0 0 1rem;color:#b3123a}
+.paper p{font-size:1.12rem;line-height:1.8;margin:0 0 1.2rem}
+.sign{font-family:var(--script);font-size:2.2rem;color:#b3123a;margin-top:1.8rem}
+.heart-end{color:var(--rose);font-size:1.6rem}
+.close{position:absolute;top:max(.9rem,env(safe-area-inset-top));right:.9rem;width:48px;height:48px;border:0;border-radius:50%;
+  background:rgba(179,18,58,.12);color:#b3123a;font-size:1.7rem;line-height:1;cursor:pointer;z-index:2;
+  position:fixed;display:grid;place-items:center}
+.close:active{transform:scale(.9)}
+
+.heart{position:fixed;z-index:90;pointer-events:none;font-size:var(--s);color:var(--rose);
+  text-shadow:0 0 10px rgba(255,111,156,.8);animation:rise 1.8s ease-out forwards;transform:translate(-50%,-50%)}
+@keyframes rise{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}15%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% - 170px)) scale(1.2) rotate(var(--r))}}
+@media (prefers-reduced-motion:reduce){.particles i,.pulse,.hint{animation:none}}
+</style>
+</head>
+<body>
+<div class="pulse"></div>
+<div class="particles" id="particles"></div>
+
+<button class="music" id="music" aria-label="Play or pause music" title="Always Forever – Cults">
+  <div class="vinyl"></div><div class="wave"><b></b><b></b><b></b><b></b></div>
+</button>
+<input type="file" id="picker" accept="audio/*" hidden>
+
+<main>
+  <h1>To the realest bad bitch ever</h1>
+  <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open the letter">
+    <div class="env" id="env">
+      <div class="back"></div>
+      <div class="peek"><span></span><span></span><span></span></div>
+      <div class="front"></div>
+      <div class="flap"></div>
+      <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6 5c2.1 0 3.6 1.1 4.5 2.5.3.5 1.7.5 2 0C13.4 6.1 14.900 5 17 5c3.300 0 5.100 3.400 3.600 6.800C19.500 16.400 12 21 12 21z"/></svg></div>
+    </div>
+  </div>
+  <p class="hint" id="hint">Tap to Open &amp; Read Full Letter</p>
+</main>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <button class="close" id="close" aria-label="Close letter">&times;</button>
+  <article class="paper"><div class="paper-in">
+    <h2>To my favorite person,</h2>
+    <p>Happy birthday to the most beautiful, sexy baddie ever! I hope this upcoming year is gentle on your heart and gives you space to enjoy life to the absolute max. You deserve a day and night full of endless love, laughter, and happiness. I am so incredibly blessed to have you by my side. Looking back, I’ll always be grateful for how randomly we clicked—I can still remember how warm and effortless it felt when we first connected. Here’s to celebrating you today and making even more amazing memories together!</p>
+    <div class="sign">Forever yours,</div>
+    <div class="heart-end">♥</div>
+  </div></article>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  // ---- Music: add a hosted/relative URL to "Always Forever" (Cults) here if you have the rights/file.
+    var $ = function(id){return document.getElementById(id)};
+  var env=$('env'), modal=$('modal'), hint=$('hint'), music=$('music'), picker=$('picker'), toast=$('toast');
+
+  // Ambient particles
+  var pc=$('particles');
+  for(var i=0;i<26;i++){
+    var p=document.createElement('i'), s=2+Math.random()*5;
+    p.style.cssText='left:'+Math.random()*100+'%;width:'+s+'px;height:'+s+'px;animation-duration:'+(9+Math.random()*12)+
+      's;animation-delay:'+(-Math.random()*20)+'s;--dx:'+((Math.random()-.5)*80)+'px';
+    pc.appendChild(p);
+  }
+
+  // Tap hearts
+  var glyphs=['♥','❤','♡','💗'];
+  document.addEventListener('pointerdown',function(e){
+    for(var n=0;n<3;n++){
+      var h=document.createElement('span');
+      h.className='heart'; h.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+      h.style.left=(e.clientX+(Math.random()-.5)*30)+'px'; h.style.top=(e.clientY+(Math.random()-.5)*20)+'px';
+      h.style.setProperty('--s',(16+Math.random()*20)+'px');
+      h.style.setProperty('--dx',((Math.random()-.5)*90)+'px');
+      h.style.setProperty('--r',((Math.random()-.5)*50)+'deg');
+      h.style.animationDelay=(n*90)+'ms';
+      document.body.appendChild(h);
+      setTimeout(function(el){el.remove()},2100+n*90,h);
+    }
+  },{passive:true});
+
+  // Audio: blob URL first, Web Audio API as fallback (works even if the host blocks media URLs)
+  function say(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(say.t);say.t=setTimeout(function(){toast.classList.remove('show')},3200)}
+  function setPlaying(on){music.classList.toggle('playing',on)}
+  var SONG='song.mp3', bytes=null;
+  var audio=new Audio(); audio.loop=true; audio.preload='auto'; audio.setAttribute('playsinline',''); audio.src=SONG;
+  var usingCtx=false, ctx=null, buf=null, node=null, userPaused=false, customFile=false;
+  audio.addEventListener('play',function(){if(!usingCtx)setPlaying(true)});
+  audio.addEventListener('pause',function(){if(!usingCtx)setPlaying(false)});
+  function ctxStart(){
+    if(!node){node=ctx.createBufferSource();node.buffer=buf;node.loop=true;node.connect(ctx.destination);node.start(0);}
+    return Promise.resolve(ctx.resume()).then(function(){setPlaying(true)});
+  }
+  function ctxPlay(){
+    var AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC) return Promise.reject(new Error('no audio'));
+    if(!ctx) ctx=new AC();
+    if(buf) return ctxStart();
+    return fetch(SONG).then(function(r){return r.arrayBuffer()}).then(function(ab){return new Promise(function(res,rej){ctx.decodeAudioData(ab,res,rej)})}).then(function(b){buf=b;return ctxStart()});
+  }
+  function fail(){say('Sorry, the song could not play on this browser 🥺')}
+  function play(){
+    if(usingCtx){ctxPlay().catch(fail);return}
+    var pr=audio.play();
+    if(pr&&pr.catch) pr.catch(function(err){
+      if(err&&err.name==='NotAllowedError'){say('Tap the vinyl to play 🎵')}
+      else if(!customFile){usingCtx=true;ctxPlay().catch(fail)}
+      else fail();
+    });
+  }
+  function pause(){
+    if(usingCtx&&ctx){Promise.resolve(ctx.suspend()).then(function(){setPlaying(false)})}
+    else audio.pause();
+  }
+  function isPlaying(){return usingCtx?(!!ctx&&ctx.state==='running'&&!!node):!audio.paused}
+  picker.addEventListener('change',function(){
+    var f=picker.files&&picker.files[0]; if(!f) return;
+    if(node){try{node.stop()}catch(e){} node=null;} usingCtx=false; customFile=true;
+    audio.src=URL.createObjectURL(f); userPaused=false; play(); say('Now playing: '+f.name.replace(/\.[^.]+$/,''));
+  });
+  music.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(isPlaying()){userPaused=true;pause()} else {userPaused=false;play()}
+  });
+
+  // Envelope + modal
+  var opened=false;
+  function showLetter(){modal.classList.add('show');modal.setAttribute('aria-hidden','false')}
+  function hideLetter(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');hint.textContent='Tap to Read the Letter Again'}
+  function openEnvelope(){
+    if(modal.classList.contains('show')) return;
+    if(opened){showLetter();return}
+    opened=true; env.classList.add('open');
+    if(!userPaused&&!isPlaying()) play();
+    setTimeout(showLetter,1900);
+  }
+  $('scene').addEventListener('click',openEnvelope);
+  $('scene').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope()}});
+  hint.addEventListener('click',openEnvelope);
+  hint.style.cursor='pointer';
+  $('close').addEventListener('click',function(e){e.stopPropagation();hideLetter()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')hideLetter()});
+})();
+</script>
+</body>
+</html>
